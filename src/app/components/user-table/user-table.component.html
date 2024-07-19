@@ -1,0 +1,39 @@
+<div class="overflow-x-auto pt-5">
+  <table class="min-w-full bg-white border border-gray-300 ">
+    <thead>
+      <tr>
+        <th class="px-4 py-2 border-b">Username</th>
+        <th class="px-4 py-2 border-b">Workouts</th>
+        <th class="px-4 py-2 border-b">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let user of paginatedUsers"
+      >
+        <td class="px-4 py-2 border-b text-center">{{ user.name }}</td>
+        <td class="px-4 py-2 border-b text-center">
+          <ul>
+            <li *ngFor="let workout of user.workouts">
+              {{ workout.type }}: {{ workout.minutes }} mins
+            </li>
+          </ul>
+        </td>
+        <td class="px-4 py-2 border-b text-center">
+          <button
+            class="px-2 py-1 bg-red-500 text-white hover:bg-red-600"
+            (click)="deleteUser(user.id, $event)"
+          >
+            Delete
+          </button>
+         
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <mat-paginator
+    [length]="users.length" 
+    [pageSizeOptions]="[5]"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
+</div>
